@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Guitar">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Guitar Minimal Motion</title>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <main id="app">
+    <section class="screen active" data-screen="home">
+      <header class="top">
+        <div>
+          <p class="tag">PWA · offline · minimal</p>
+          <h1>Guitar<br>Motion</h1>
+        </div>
+        <button class="round" id="soundToggle" aria-label="Alternar som">♪</button>
+      </header>
+
+      <p class="intro">Uma home limpa para acessar afinador, escalas e metrônomo com movimentos suaves e interação sonora.</p>
+
+      <div class="cards">
+        <button class="home-card" data-go="tuner">
+          <span>01</span>
+          <strong>Afinador</strong>
+          <em>cordas, microfone e referência</em>
+          <b></b>
+        </button>
+        <button class="home-card" data-go="scales">
+          <span>02</span>
+          <strong>Escalas</strong>
+          <em>partitura simples e elegante</em>
+          <b></b>
+        </button>
+        <button class="home-card" data-go="metronome">
+          <span>03</span>
+          <strong>Metrônomo</strong>
+          <em>pulso visual e sonoro</em>
+          <b></b>
+        </button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tuner">
+      <nav class="nav">
+        <button data-go="home" class="back">← Home</button>
+        <p>Afinador</p>
+      </nav>
+
+      <div class="panel tuner">
+        <div class="content-layer">
+          <p class="tag">corda selecionada</p>
+          <h2 id="stringTitle">1 · E4</h2>
+          <p class="freq" id="stringFreq">329,63 Hz</p>
+
+          <div class="meter">
+            <div class="ticks"></div>
+            <div class="safe-zone"></div>
+            <div class="needle" id="needle"></div>
+          </div>
+
+          <div class="status" id="status">Escolha uma corda ou ligue o microfone</div>
+
+          <div class="actions">
+            <button id="micBtn" class="main-btn">Usar microfone</button>
+            <button id="refBtn" class="ghost-btn">Tocar referência</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="strings">
+        <button class="string active" data-name="1 · E4" data-freq="329.63"><i>1</i><strong>E</strong><small>329,63 Hz · E4</small></button>
+        <button class="string" data-name="2 · B3" data-freq="246.94"><i>2</i><strong>B</strong><small>246,94 Hz · B3</small></button>
+        <button class="string" data-name="3 · G3" data-freq="196.00"><i>3</i><strong>G</strong><small>196,00 Hz · G3</small></button>
+        <button class="string" data-name="4 · D3" data-freq="146.83"><i>4</i><strong>D</strong><small>146,83 Hz · D3</small></button>
+        <button class="string" data-name="5 · A2" data-freq="110.00"><i>5</i><strong>A</strong><small>110,00 Hz · A2</small></button>
+        <button class="string" data-name="6 · E2" data-freq="82.41"><i>6</i><strong>E</strong><small>82,41 Hz · E2</small></button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="scales">
+      <nav class="nav">
+        <button data-go="home" class="back">← Home</button>
+        <p>Escalas</p>
+      </nav>
+
+      <div class="scale-wrap">
+        <div class="scale-list">
+          <button class="choice active" data-scale="cmajor">Dó maior</button>
+          <button class="choice" data-scale="gmajor">Sol maior</button>
+          <button class="choice" data-scale="aminor">Lá menor</button>
+          <button class="choice" data-scale="eminor">Mi menor</button>
+        </div>
+        <div class="panel score-panel">
+          <div class="content-layer">
+            <p class="tag">partitura</p>
+            <h2 id="scaleTitle">Dó maior</h2>
+            <svg id="score" viewBox="0 0 720 270"></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="metronome">
+      <nav class="nav">
+        <button data-go="home" class="back">← Home</button>
+        <p>Metrônomo</p>
+      </nav>
+
+      <div class="panel metro">
+        <div class="content-layer metro-content">
+          <div class="orb" id="orb"><span></span></div>
+          <div class="bpm-row">
+            <button id="down">−</button>
+            <strong id="bpm">96</strong>
+            <button id="up">+</button>
+          </div>
+          <p class="tag">bpm</p>
+          <input type="range" id="range" min="40" max="220" value="96">
+          <button class="main-btn" id="metroToggle">Iniciar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));
+    }
+  </script>
+</body>
+</html>
