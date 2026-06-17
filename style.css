@@ -97,3 +97,20 @@ input[type=range]{width:min(620px,88vw);accent-color:#fff}
   .strings{gap:10px}.string{min-height:92px;display:grid;grid-template-columns:32px 58px 1fr;align-items:center}.string strong,.string small{margin:0}
   .score-panel{padding:24px;min-height:420px}.score-panel h2{font-size:46px}
 }
+
+.audio-prime{
+  height:54px;
+  padding:0 22px;
+  margin:0 0 28px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  backdrop-filter:blur(16px);
+  transition:transform .22s, background .22s, border-color .22s, opacity .22s;
+}
+.audio-prime.ready{
+  opacity:.55;
+  background:rgba(255,255,255,.03);
+}
+.audio-prime:active{transform:scale(.96)}
